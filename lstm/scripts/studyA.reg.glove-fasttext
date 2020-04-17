@@ -1,0 +1,55 @@
+#!/bin/bash
+export PYTHONPATH=$(pwd)
+
+# Experiment veriables
+export dataset=wotd
+export use_ci=true
+export predictor_type=reg
+
+export batch_size=32
+export batch_check_mode=false
+
+export debug_mode=false
+export hyperparam_mode=false
+
+export attention_type=additive
+export embedding_type=glove-fasttext
+
+export encoder_num_layers=2      # TUNED
+export encoder_hidden_dim=200    # TUNED
+export encoder_dropout=0.0
+
+export predictor_num_layers=3    # TUNED
+export predictor_hidden_dim=200  # TUNED
+export predictor_dropout=0.0
+
+export num_epochs=100
+export learning_rate=0.001
+
+# Run
+EXPERIMENT_FOLDER=models/simple
+EXPERIMENT_FILE=experiment-concat-embeddings.jsonnet
+RESULTS_FOLDER=.
+
+#! Full path to application executable:
+application="python -m allennlp.run train"
+
+#! Run options for the application:
+options="${EXPERIMENT_FOLDER}/${EXPERIMENT_FILE} --include-package models"
+
+SEED=( 1 2 3 4 5 6 )
+NO_EVENT=( false true )
+
+for seed in "${SEED[@]}"
+do
+  for no_event in "${NO_EVENT[@]}"
+  do
+    EXPERIMENT_SPECIFIC_NAME=run-${seed}
+    EXPERIMENT_SET_FOLDER=simple/studyA/${dataset}/${predictor_type}/no-event-${no_event}
+    EXPERIMENT_NAME=${EXPERIMENT_SET_FOLDER}/${EXPERIMENT_SPECIFIC_NAME}
+    CMD="$application $options -s ${RESULTS_FOLDER}/results/${EXPERIMENT_NAME} --overrides \"{'random_seed': '${seed}','numpy_seed': '${seed}','pytorch_seed': '${seed}','dataset_reader': {'type': 'heo-reader-only-events-with-ci', 'no_event': ${no_event}}}\""
+    echo $EXPERIMENT_NAME
+    echo $CMD
+    eval $CMD
+  done
+done

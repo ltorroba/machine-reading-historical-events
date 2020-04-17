@@ -1,0 +1,30 @@
+#!/bin/bash
+export PYTHONPATH=$(pwd)
+
+# Experiment veriables
+export dataset=otd
+export use_ci=false
+export predictor_type=reg
+
+export batch_size=32
+export batch_check_mode=false
+
+export debug_mode=false
+export hyperparam_mode=true
+
+export attention_type=additive
+export embedding_type=glove-fasttext
+
+#export encoder_num_layers=3      # TUNING
+#export encoder_hidden_dim=300    # TUNING
+export encoder_dropout=0.0
+
+#export predictor_num_layers=3    # TUNING
+#export predictor_hidden_dim=300  # TUNING
+export predictor_dropout=0.0
+
+export num_epochs=30
+export learning_rate=0.001
+
+# Run
+./models/simple/hyperparam.prototype.glove-fasttext.sh

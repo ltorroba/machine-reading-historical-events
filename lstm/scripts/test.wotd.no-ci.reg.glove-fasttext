@@ -1,0 +1,32 @@
+#!/bin/bash
+export PYTHONPATH=$(pwd)
+
+# Experiment veriables
+export dataset=wotd
+export use_ci=false
+export predictor_type=reg
+
+export batch_size=32
+export batch_check_mode=false
+
+export debug_mode=false
+export hyperparam_mode=false
+
+export attention_type=additive
+export embedding_type=glove-fasttext
+
+export encoder_num_layers=3      # TUNED
+export encoder_hidden_dim=200    # TUNED
+export encoder_dropout=0.0
+
+export predictor_num_layers=3    # TUNED
+export predictor_hidden_dim=50   # TUNED
+export predictor_dropout=0.0
+
+export num_epochs=100
+export learning_rate=0.001
+
+export TESTSET_FILENAME=wotd.pkl
+
+# Run
+./models/simple/run-test.prototype.glove-fasttext.sh
