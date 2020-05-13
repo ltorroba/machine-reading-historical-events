@@ -19,10 +19,10 @@ We provide 80/10/10 splits.
 Below we also include the results of our two best performing model variants
 (the bag-of-embeddings classifier, and the LSTM regressor).
 
-*BoE model results coming soon...*
 
-
-|                   | Kendall's Tau | Exact Match | Under 10Y | Under 50Y | Mean Absolute Error |
+|                   | Kendall's Tau | Exact Match | Under 20Y | Under 50Y | Mean Absolute Error |
 |-------------------|---------------|-------------|-----------|-----------|---------------------|
 | LSTM (Reg, No CI) | 0.671±0.010   | 2.8±0.3     | 64.9±2.3  | 86.6±1.0  | 30.4±1.3            |
 | LSTM (Reg, CI)    | 0.700±0.005   | 2.8±0.2     | 68.8±0.9  | 88.5±0.4  | 27.4±0.8            |
+| BOE (Cls, No CI)  | 0.603±0.004   | 10.0±0.2    | 64.2±0.4  | 83.6±0.3  | 36.9±0.7            |
+| BOE (Cls, CI)     | 0.579±0.010   | 8.7±0.2     | 64.4±0.5  | 82.9±0.4  | 38.5±0.6            |
